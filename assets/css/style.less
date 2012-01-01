@@ -1,0 +1,291 @@
+@charset "UTF-8";
+
+/*----------------------------------------
+LESS FUNCTIONS
+------------------------------------------*/
+
+.shadow(){
+	-moz-box-shadow: 0px 0px 5px RGBA(0,0,0,0.2);
+	-webkit-box-shadow: 0px 0px 5px RGBA(0,0,0,0.2);
+	-ms-box-shadow: 0px 0px 5px RGBA(0,0,0,0.2);
+	-o-box-shadow: 0px 0px 5px RGBA(0,0,0,0.2);
+	box-shadow: 0px 0px 5px RGBA(0,0,0,0.2);
+}
+
+.roundys(@rad){
+	-moz-border-radius:@rad;
+	-webkit-border-radius:@rad;
+	-ms-border-radius:@rad;
+	-o-border-radius:@rad;
+	border-radius:@rad;
+}
+
+/*----------------------------------------
+TABLE OF CONTENTS
+1. FONTS
+2. SWATCH
+3. RESET AND GRID
+4. CLEARING
+5. FORMS
+6. UNIVERSAL LAYOUT
+------------------------------------------*/
+
+
+/*----------------------------------------
+1. FONTS
+------------------------------------------*/
+
+@gill: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+@helvetica: "Helvetica Neue", Arial, Helvetica, sans-serif;
+@georgia: Georgia, 'Times New Roman', Times, Serif;
+
+/*----------------------------------------
+2. SWATCH
+------------------------------------------*/
+
+@yellow:#f8cf12;
+@red:#dc4d10;
+@dark-grey:#444;
+@light-grey: #eee;
+@light: #fff;
+@dark: #222;
+
+@text: #222;
+@link: #dc4d10;
+@hover: #f8cf12;
+
+/*----------------------------------------
+3. RESET AND GRID
+------------------------------------------*/
+
+@import "reset.less";
+@import "text.less";
+@import "grid.less";
+
+/*----------------------------------------
+4. CLEARING
+------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before,
+.clearfix:after {
+  content: '\0020';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/*
+  The following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix {
+  zoom: 1;
+}
+
+
+/*----------------------------------------
+5. FORMS
+------------------------------------------*/
+
+input, textarea{
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	text-shadow: 0 -1px 1px rgba(255, 255, 255, 0.01);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea{
+	padding:5px;
+	font-size: 1.2em;
+	margin:0;
+	border:none;
+	-moz-box-shadow:inset 0px 0px 5px RGBA(0,0,0,0.2);
+	-ms-box-shadow:inset 0px 0px 5px RGBA(0,0,0,0.2);
+	-o-box-shadow:inset 0px 0px 5px RGBA(0,0,0,0.2);
+	-webkit-box-shadow:inset 0px 0px 5px RGBA(0,0,0,0.2);
+	box-shadow:inset 0px 0px 5px RGBA(0,0,0,0.2);
+	-webkit-transition:outline .3s ease-in-out;
+	-moz-transition:outline .3s ease-in-out;
+	-o-transition:outline .3s ease-in-out;
+	transition:outline .3s ease-in-out;
+}
+
+input:focus, textarea:focus, select:focus{
+	outline: 1px solid @yellow;
+}
+
+.standard_input{
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	input[type="number"],
+	input[type="date"],
+	input[type="time"]{
+		width:300px;
+	}
+}
+.small_input{
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	input[type="number"],
+	input[type="date"],
+	input[type="time"]{
+		width:130px;
+	}
+}
+textarea{
+	width:542px;
+	height:300px;
+}
+select{
+	height:48px;
+	font-size: 1em;
+	width:400px;
+	border: 1px solid #ddd;
+}
+input[type="submit"]{
+	display: block;
+	border:none;
+	&:hover, &:focus{
+		cursor: pointer;
+	}
+}
+
+.site_form{
+	margin-right: 0;
+	padding-left: 0;
+	list-style-type: none;
+	li{
+		margin-bottom: 1.5em;
+		div.form_tip{
+			font-size: small;
+			font-style: italic;
+			color: #666;
+			font-family: @georgia;
+		}
+		div.error{
+			color:@red;
+			font-weight: bold;
+		}
+		div.non_edit{
+			padding-top:3px;
+			width:520px;
+			float: left;
+		}
+		figure{
+			float: left;
+			border: 1px solid #ddd;
+			margin-right: 10px;
+		}
+	}
+	li.checkbox_input div{
+		font-size: small;
+		font-family: @georgia;
+		font-style: italic;
+		checkbox{
+			float: left;
+		}
+	}
+	select{
+		height:34px;
+	}
+	.small_input{
+		select{
+			width:130px;
+		}
+	}
+	label{
+		float: left;
+		padding-top: 3px;
+		width:150px;
+		text-align: right;
+		margin-right: 30px;
+	}
+	.form_input{
+		float: left;
+		width:552px;
+	}
+	input[type="submit"]{
+		margin-left: 180px;
+	}
+}
+
+/*----------------------------------------
+6. UNIVERSAL LAYOUT
+------------------------------------------*/
+body{
+	background: #fff;
+}
+#site_message{
+	background: #fff;
+	font-size: small;
+	padding: 10px 0;
+	top:0;
+	>div{
+		.row();
+		>div{
+			.column(12);
+		}
+	}
+	p, ul{
+		margin-bottom: 0;
+	}
+}
+header#worlds_birth{
+	height:60px;
+	>div{
+		.row();
+		>div{
+			.column(12);
+		}
+	}
+}
+
+#main{
+	>div{
+		.row();
+		>div{
+			.column(12);
+		}
+	}
+}
+
+footer#worlds_end{
+	>div{
+		.row();
+		>div{
+			.column(12);
+		}
+	}
+}
