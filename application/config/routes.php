@@ -41,6 +41,17 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 
+$route['register'] = 'auth/register';
+$route['login'] = 'auth/login';
+$route['logout'] = 'auth/logout';
+$route['send-again'] = 'auth/send_again';
+$route['activate'] = 'auth/activate';
+$route['forgot-password'] = 'auth/forgot_password';
+$route['reset-password/(:num)/(:any)'] = 'auth/reset_password/$1/$2';
+$route['change-password'] = 'auth/change_password';
+$route['change-email'] = 'auth/change_email';
+$route['reset-email'] = 'auth/reset_email';
+$route['unregister'] = 'auth/unregister';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
