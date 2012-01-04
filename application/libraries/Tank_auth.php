@@ -178,6 +178,7 @@ class Tank_auth
 				'username'	=> $username,
 				'password'	=> $hashed_password,
 				'email'		=> $email,
+				'role'		=> 1,
 				'last_ip'	=> $this->ci->input->ip_address(),
 			);
 
@@ -346,7 +347,7 @@ class Tank_auth
 						$this->ci->config->item('forgot_password_expire', 'tank_auth'))) {	// success
 
 					// Clear all user's autologins
-					$this->ci->load->model('tank_auth/user_autologin');
+					$this->ci->load->model('auth/user_autologin');
 					$this->ci->user_autologin->clear($user->id);
 
 					return array(
@@ -511,7 +512,7 @@ class Tank_auth
 		$this->ci->load->helper('cookie');
 		$key = substr(md5(uniqid(rand().get_cookie($this->ci->config->item('sess_cookie_name')))), 0, 16);
 
-		$this->ci->load->model('tank_auth/user_autologin');
+		$this->ci->load->model('auth/user_autologin');
 		$this->ci->user_autologin->purge($user_id);
 
 		if ($this->ci->user_autologin->set($user_id, md5($key))) {
@@ -537,7 +538,7 @@ class Tank_auth
 
 			$data = unserialize($cookie);
 
-			$this->ci->load->model('tank_auth/user_autologin');
+			$this->ci->load->model('auth/user_autologin');
 			$this->ci->user_autologin->delete($data['user_id'], md5($data['key']));
 
 			delete_cookie($this->ci->config->item('autologin_cookie_name', 'tank_auth'));
@@ -598,7 +599,7 @@ class Tank_auth
 	function is_max_login_attempts_exceeded($login)
 	{
 		if ($this->ci->config->item('login_count_attempts', 'tank_auth')) {
-			$this->ci->load->model('tank_auth/login_attempts');
+			$this->ci->load->model('auth/login_attempts');
 			return $this->ci->login_attempts->get_attempts_num($this->ci->input->ip_address(), $login)
 					>= $this->ci->config->item('login_max_attempts', 'tank_auth');
 		}
@@ -616,7 +617,7 @@ class Tank_auth
 	{
 		if ($this->ci->config->item('login_count_attempts', 'tank_auth')) {
 			if (!$this->is_max_login_attempts_exceeded($login)) {
-				$this->ci->load->model('tank_auth/login_attempts');
+				$this->ci->load->model('auth/login_attempts');
 				$this->ci->login_attempts->increase_attempt($this->ci->input->ip_address(), $login);
 			}
 		}
@@ -632,7 +633,7 @@ class Tank_auth
 	private function clear_login_attempts($login)
 	{
 		if ($this->ci->config->item('login_count_attempts', 'tank_auth')) {
-			$this->ci->load->model('tank_auth/login_attempts');
+			$this->ci->load->model('auth/login_attempts');
 			$this->ci->login_attempts->clear_attempts(
 					$this->ci->input->ip_address(),
 					$login,
